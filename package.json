@@ -1,0 +1,51 @@
+{
+    "name": "conf-openssl-actual",
+    "exportedEnvVars": {
+        "conf_openssl_installed": {
+            "global": true,
+            "globalCollisionBehavior": "clobber",
+            "val": "true"
+        },
+        "FINDLIB": {
+            "global": true,
+            "resolveAsRelativePath": true,
+            "globalCollisionBehavior": "joinPath",
+            "val": "./_build/ocamlfind/lib"
+        },
+        "conf_openssl_enable": {
+            "global": true,
+            "globalCollisionBehavior": "clobber",
+            "val": "enable"
+        },
+        "version": {
+            "global": true,
+            "globalCollisionBehavior": "clobber",
+            "val": "1.0.0"
+        },
+        "PATH": {
+            "global": true,
+            "resolveAsRelativePath": true,
+            "globalCollisionBehavior": "joinPath",
+            "val": "./_build/ocamlfind/bin"
+        },
+        "conf_openssl_version": {
+            "global": true,
+            "globalCollisionBehavior": "clobber",
+            "val": "1.0.0"
+        }
+    },
+    "version": "1.0.0",
+    "dependencies": {
+        "substs": "https://github.com/yunxing/substs.git",
+        "@opam-alpha/conf-pkg-config": "*",
+        "nopam": "https://github.com/yunxing/nopam.git",
+        "opam-installer-bin": "https://github.com/yunxing/opam-installer-bin.git",
+        "dependency-env": "https://github.com/npm-ml/dependency-env.git"
+    },
+    "scripts": {
+        "postinstall": "eval $(dependencyEnv) && nopam && pkg-config openssl && (opam-installer --prefix=$opam_prefix || true)"
+    },
+    "peerDependencies": {
+        "@opam-alpha/ocaml": ">= 4.2.3"
+    }
+}
